@@ -1,1 +1,11 @@
 node_modules
+credentials.json
+terraform.tfstate
+terraform.tfstate.backup
+crash.log
+*.tfvars
+*.tfvars.json
+.terraform/
+*.tfplan
+.terraform.lock.hcl
+

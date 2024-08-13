@@ -28,6 +28,5 @@ jobs:
         uses: "google-github-actions/deploy-cloud-functions@v3"
         with:
           name: "function-1"
-          runtime: "nodejs22"
-          entry_point: "main"
+          project_id: "my-project-12345"
           source_dir: "./dist"
