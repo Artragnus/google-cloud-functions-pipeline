@@ -1,0 +1,33 @@
+name: "CD"
+
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  deploy-cloud-function:
+    runs-on: "ubuntu-latest"
+    steps:
+      - uses: "actions/checkout@v4"
+
+      - id: "auth"
+        uses: "google-github-actions/auth@v2"
+        with:
+          credentials_json: "${{ secrets.GOOGLE_CREDENTIALS}}"
+
+      - id: "setup-node"
+        uses: "actions/setup-node@v4"
+        with:
+          node-version: "22"
+
+      - run: "npm install"
+      - run: "tsc"
+
+      - id: "deploy"
+        uses: "google-github-actions/deploy-cloud-functions@v3"
+        with:
+          name: "my-cloud-function"
+          runtime: "nodejs22"
+          entry_point: "main"
+          source_dir: "./dist"
